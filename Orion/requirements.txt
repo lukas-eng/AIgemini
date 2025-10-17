@@ -2,10 +2,9 @@ fastapi
 uvicorn
 python-dotenv
 google-generativeai
-pandas
+requests
 matplotlib
+pandas
 pyttsx3
 deep-translator
 beautifulsoup4
-requests
-gtts
