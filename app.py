@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from conversational_agent5 import ConversationalAgent
 from gtts import gTTS
 import pandas as pd
+from fastapi.staticfiles import StaticFiles
 import matplotlib.pyplot as plt
 import requests
 import os
@@ -211,5 +212,6 @@ def obtener_clima(ciudad: str = "Bogotá"):
         return {"respuesta": f"En {ciudad} hay {temperatura}°C y viento de {viento} km/h."}
     except Exception as e:
         return {"respuesta": f"No pude obtener el clima: {str(e)}"}
+
 
 
