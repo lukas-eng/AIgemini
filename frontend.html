@@ -125,7 +125,7 @@
       if (!f) return alert("Selecciona un archivo CSV primero.");
       let form = new FormData();
       form.append("file", f);
-      let r = await fetch("http://127.0.0.1:8000/upload", {method:"POST", body:form});
+      let r = await fetch("https://orionxgemini.onrender.com/upload", {method:"POST", body:form});
       let j = await r.json();
       document.getElementById("csv_result").textContent = "✅ Archivo cargado: " + j.filename;
       document.getElementById("analyzeBtn").classList.remove("hidden");
@@ -135,7 +135,7 @@
   document.getElementById("analyzeBtn").onclick = async function() {
       chat_history.push({role: 'user', msg: "Analiza el CSV"});
       render_chat();
-      const r = await fetch("http://127.0.0.1:8000/analizar_csv", {method:"POST"});
+      const r = await fetch("https://orionxgemini.onrender.com/analizar_csv", {method:"POST"});
       const j = await r.json();
       chat_history.push({role: 'agent', msg: j.response});
       render_chat();
@@ -150,7 +150,7 @@
     render_chat();
     userInput.value = "";
 
-    let endpoint = "http://127.0.0.1:8000/chat";
+    let endpoint = "https://orionxgemini.onrender.com/chat";
     let form = new FormData();
 
     form.append("user_message", usermsg);
@@ -162,7 +162,7 @@
     if (j.graphic)
       document.getElementById("img").innerHTML = `
         <p class="font-medium mb-2 text-gray-300">📊 Última gráfica generada:</p>
-        <img class="rounded-lg shadow-md mx-auto max-w-md border border-gray-700" src="http://127.0.0.1:8000/image/${j.graphic}">
+        <img class="rounded-lg shadow-md mx-auto max-w-md border border-gray-700" src="https://orionxgemini.onrender.com/image/${j.graphic}">
       `;
     else
       document.getElementById("img").innerHTML = '';
@@ -186,3 +186,4 @@
   </script>
 </body>
 </html>
+
