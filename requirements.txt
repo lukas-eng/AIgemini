@@ -9,3 +9,6 @@ deep-translator
 beautifulsoup4
 requests
 gtts
+python-multipart
+
+
