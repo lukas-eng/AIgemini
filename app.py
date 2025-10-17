@@ -26,8 +26,7 @@ app.add_middleware(
 def root():
     with open("frontend.html", encoding="utf-8") as f:
         return HTMLResponse(f.read())
-
-
+app.mount("/static", StaticFiles(directory="."), name="static")
 # 💬 CHAT PRINCIPAL (DETECTA TODAS LAS INTENCIONES)
 @app.post("/chat")
 async def chat(user_message: str = Form(...)):
@@ -212,3 +211,4 @@ def obtener_clima(ciudad: str = "Bogotá"):
         return {"respuesta": f"En {ciudad} hay {temperatura}°C y viento de {viento} km/h."}
     except Exception as e:
         return {"respuesta": f"No pude obtener el clima: {str(e)}"}
+
