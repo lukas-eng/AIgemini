@@ -28,7 +28,7 @@ def root():
         return HTMLResponse(f.read())
 app.mount("/static", StaticFiles(directory="."), name="static")
 # 💬 CHAT PRINCIPAL (DETECTA TODAS LAS INTENCIONES)
-@app.post("/chat")
+@app.post("https://orionxgemini.onrender.com/chat")
 async def chat(user_message: str = Form(...)):
     mensaje = user_message.lower()
     graphic = None
@@ -147,7 +147,7 @@ async def chat(user_message: str = Form(...)):
 
 
 # 📂 SUBIR ARCHIVO CSV
-@app.post("/upload")
+@app.post("https://orionxgemini.onrender.com/upload")
 async def upload(file: UploadFile = File(...)):
     out = file.filename
     with open(out, "wb") as f:
@@ -156,13 +156,13 @@ async def upload(file: UploadFile = File(...)):
 
 
 # 🖼️ SERVIR IMÁGENES
-@app.get("/image/{name}")
+@app.get("https://orionxgemini.onrender.com/image/{name}")
 def image(name: str):
     return FileResponse(os.path.abspath(name))
 
 
 # 🔊 VOZ
-@app.post("/voz")
+@app.post("https://orionxgemini.onrender.com/voz")
 async def voz_endpoint(text: str = Form(...)):
     tts = gTTS(text, lang="es")
     filename = "voz.mp3"
@@ -171,35 +171,35 @@ async def voz_endpoint(text: str = Form(...)):
 
 
 # 🌐 SCRAPE
-@app.post("/scrape")
+@app.post("https://orionxgemini.onrender.com/scrape")
 async def scrape_endpoint(url: str = Form(...)):
     result = agent.scrape(url)
     return {"response": result}
 
 
 # 🔍 BUSCAR WEB
-@app.post("/buscar")
+@app.post("https://orionxgemini.onrender.com/buscar")
 async def buscar_endpoint(query: str = Form(...)):
     result = agent.search(query)
     return {"response": result}
 
 
 # 🌎 TRADUCIR
-@app.post("/traducir")
+@app.post("https://orionxgemini.onrender.com/traducir")
 async def traducir_endpoint(text: str = Form(...), target: str = Form("en")):
     result = agent.translate(text, target)
     return {"response": result}
 
 
 # ➗ CALCULAR
-@app.post("/calcular")
+@app.post("https://orionxgemini.onrender.com/calcular")
 async def calcular_endpoint(expr: str = Form(...)):
     result = agent.calculate(expr)
     return {"response": result}
 
 
 # 🌤️ CLIMA DIRECTO
-@app.get("/clima")
+@app.get("https://orionxgemini.onrender.com/clima")
 def obtener_clima(ciudad: str = "Bogotá"):
     try:
         url = f"https://api.open-meteo.com/v1/forecast?latitude=4.61&longitude=-74.08&current_weather=true"
@@ -211,4 +211,5 @@ def obtener_clima(ciudad: str = "Bogotá"):
         return {"respuesta": f"En {ciudad} hay {temperatura}°C y viento de {viento} km/h."}
     except Exception as e:
         return {"respuesta": f"No pude obtener el clima: {str(e)}"}
+
 
